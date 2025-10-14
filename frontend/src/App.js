@@ -46,7 +46,7 @@ function App() {
   };
 
   if (isLoggedIn) {
-    return <Dashboard />;
+    return <Dashboard username={formData.username} onLogout={() => setIsLoggedIn(false)} />;
   }
 
   return (

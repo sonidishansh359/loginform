@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
 
-function Dashboard() {
+function Dashboard({ username, onLogout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('dashboard');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,7 +19,7 @@ function Dashboard() {
       {/* Header with Menu */}
       <header className="dashboard-header">
         <div className="header-content">
-          <h1 className="dashboard-title">Creative Dashboard</h1>
+          <h1 className="dashboard-title">Dashboard</h1>
           <div className="menu-container">
             <button className="menu-toggle" onClick={toggleMenu}>
               <span className="menu-icon">☰</span>
@@ -29,26 +29,26 @@ function Dashboard() {
               <ul>
                 <li>
                   <button
+                    className={activeSection === 'dashboard' ? 'active' : ''}
+                    onClick={() => handleMenuClick('dashboard')}
+                  >
+                    Dashboard
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={activeSection === 'profile' ? 'active' : ''}
+                    onClick={() => handleMenuClick('profile')}
+                  >
+                    Profile
+                  </button>
+                </li>
+                <li>
+                  <button
                     className={activeSection === 'home' ? 'active' : ''}
                     onClick={() => handleMenuClick('home')}
                   >
                     Home
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={activeSection === 'about' ? 'active' : ''}
-                    onClick={() => handleMenuClick('about')}
-                  >
-                    About
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={activeSection === 'contact' ? 'active' : ''}
-                    onClick={() => handleMenuClick('contact')}
-                  >
-                    Contact
                   </button>
                 </li>
               </ul>
@@ -59,72 +59,80 @@ function Dashboard() {
 
       {/* Main Content */}
       <main className="dashboard-main">
+        {activeSection === 'dashboard' && (
+          <section className="section dashboard-section">
+            <div className="section-content">
+              <div className="welcome-message">
+                <h2>Welcome back, {username} 👋</h2>
+                <p>Here's what's happening with your account today.</p>
+              </div>
+              <div className="dashboard-cards">
+                <div className="card">
+                  <div className="card-icon">📊</div>
+                  <h3>Analytics</h3>
+                  <p>View your data insights</p>
+                  <button className="card-btn">View Data</button>
+                </div>
+                <div className="card">
+                  <div className="card-icon">📝</div>
+                  <h3>Forms</h3>
+                  <p>Manage your submitted forms</p>
+                  <button className="card-btn">View Forms</button>
+                </div>
+                <div className="card">
+                  <div className="card-icon">⚙️</div>
+                  <h3>Settings</h3>
+                  <p>Customize your experience</p>
+                  <button className="card-btn">Update Profile</button>
+                </div>
+              </div>
+              <div className="activity-summary">
+                <h3>Recent Activity</h3>
+                <ul>
+                  <li>Last login: Today at 10:30 AM</li>
+                  <li>Form submitted: 2 days ago</li>
+                  <li>Profile updated: 1 week ago</li>
+                </ul>
+              </div>
+              <button className="logout-btn" onClick={onLogout}>Logout</button>
+            </div>
+          </section>
+        )}
+
+        {activeSection === 'profile' && (
+          <section className="section profile-section">
+            <div className="section-content">
+              <h2>User Profile</h2>
+              <div className="profile-info">
+                <div className="profile-avatar">
+                  <span>{username.charAt(0).toUpperCase()}</span>
+                </div>
+                <div className="profile-details">
+                  <h3>{username}</h3>
+                  <p>Full Stack Developer</p>
+                  <p>Email: {username}@example.com</p>
+                </div>
+              </div>
+              <div className="profile-actions">
+                <button className="action-btn">Edit Profile</button>
+                <button className="action-btn">Change Password</button>
+                <button className="action-btn">Change Theme</button>
+              </div>
+              <button className="logout-btn" onClick={onLogout}>Logout</button>
+            </div>
+          </section>
+        )}
+
         {activeSection === 'home' && (
           <section className="section home-section">
             <div className="section-content">
-              <h2>Welcome to Your Dashboard</h2>
-              <p>Explore the creative sections using the menu above.</p>
-              <div className="home-cards">
-                <div className="card">
-                  <h3>Analytics</h3>
-                  <p>View your data insights</p>
-                </div>
-                <div className="card">
-                  <h3>Projects</h3>
-                  <p>Manage your ongoing projects</p>
-                </div>
-                <div className="card">
-                  <h3>Settings</h3>
-                  <p>Customize your experience</p>
-                </div>
+              <h2>Hello, {username}!</h2>
+              <p>Welcome to your personal space. Here you can fill forms and view your data.</p>
+              <div className="home-actions">
+                <button className="action-btn">Fill New Form</button>
+                <button className="action-btn">View Submitted Data</button>
               </div>
-            </div>
-          </section>
-        )}
-
-        {activeSection === 'about' && (
-          <section className="section about-section">
-            <div className="section-content">
-              <h2>About This Dashboard</h2>
-              <p>This is a creative and modern dashboard built with React.</p>
-              <div className="about-features">
-                <div className="feature">
-                  <div className="feature-icon">🚀</div>
-                  <h4>Fast & Responsive</h4>
-                  <p>Built for speed and mobile-first design</p>
-                </div>
-                <div className="feature">
-                  <div className="feature-icon">🎨</div>
-                  <h4>Creative Design</h4>
-                  <p>Modern UI with smooth animations</p>
-                </div>
-                <div className="feature">
-                  <div className="feature-icon">⚡</div>
-                  <h4>Interactive</h4>
-                  <p>Engaging user interactions</p>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {activeSection === 'contact' && (
-          <section className="section contact-section">
-            <div className="section-content">
-              <h2>Get In Touch</h2>
-              <p>Have questions? We'd love to hear from you!</p>
-              <form className="contact-form">
-                <div className="form-group">
-                  <input type="text" placeholder="Your Name" required />
-                </div>
-                <div className="form-group">
-                  <input type="email" placeholder="Your Email" required />
-                </div>
-                <div className="form-group">
-                  <textarea placeholder="Your Message" rows="5" required></textarea>
-                </div>
-                <button type="submit" className="submit-btn">Send Message</button>
-              </form>
+              <button className="logout-btn" onClick={onLogout}>Logout</button>
             </div>
           </section>
         )}
