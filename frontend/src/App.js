@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Portfolio from './Portfolio';
+import Dashboard from './Dashboard';
 import './App.css';
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
   };
 
   if (isLoggedIn) {
-    return <Portfolio />;
+    return <Dashboard />;
   }
 
   return (
