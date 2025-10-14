@@ -1,142 +1,108 @@
-import React, { useState } from 'react';
-import './Dashboard.css';
+import React, { useState } from "react";
+import "./Dashboard.css";
 
-function Dashboard({ username, onLogout }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('dashboard');
+function Dashboard() {
+  const [activeSection, setActiveSection] = useState("home");
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleMenuClick = (section) => {
-    setActiveSection(section);
-    setIsMenuOpen(false);
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="dashboard">
-      {/* Header with Menu */}
-      <header className="dashboard-header">
-        <div className="header-content">
-          <h1 className="dashboard-title">Dashboard</h1>
-          <div className="menu-container">
-            <button className="menu-toggle" onClick={toggleMenu}>
-              <span className="menu-icon">☰</span>
-              Menu
-            </button>
-            <nav className={`nav-menu ${isMenuOpen ? 'open' : ''}`}>
-              <ul>
-                <li>
-                  <button
-                    className={activeSection === 'dashboard' ? 'active' : ''}
-                    onClick={() => handleMenuClick('dashboard')}
-                  >
-                    Dashboard
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={activeSection === 'profile' ? 'active' : ''}
-                    onClick={() => handleMenuClick('profile')}
-                  >
-                    Profile
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={activeSection === 'home' ? 'active' : ''}
-                    onClick={() => handleMenuClick('home')}
-                  >
-                    Home
-                  </button>
-                </li>
-              </ul>
-            </nav>
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="logo">FullStack Dev</div>
+        <ul className="nav-links">
+          <li onClick={() => scrollToSection("home")}>Home</li>
+          <li onClick={() => scrollToSection("about")}>About</li>
+          <li onClick={() => scrollToSection("skills")}>Skills</li>
+          <li onClick={() => scrollToSection("projects")}>Projects</li>
+          <li onClick={() => scrollToSection("contact")}>Contact</li>
+        </ul>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="hero-section">
+        <div className="hero-content">
+          <h1>Hello, I'm <span>Dishansh</span></h1>
+          <p>Full Stack Developer | React, Node.js, MongoDB | Building modern web applications</p>
+          <button onClick={() => scrollToSection("projects")}>View Projects</button>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="about-section">
+        <h2>About Me</h2>
+        <div className="about-content">
+          <p>
+            I am a passionate Full Stack Developer with expertise in building
+            modern web applications using React, Node.js, Express, and MongoDB.
+            I love transforming ideas into real-world applications and constantly
+            learning new technologies.
+          </p>
+          <div className="about-image">
+            <img src="https://via.placeholder.com/300" alt="Dishansh" />
           </div>
         </div>
-      </header>
+      </section>
 
-      {/* Main Content */}
-      <main className="dashboard-main">
-        {activeSection === 'dashboard' && (
-          <section className="section dashboard-section">
-            <div className="section-content">
-              <div className="welcome-message">
-                <h2>Welcome back, {username} 👋</h2>
-                <p>Here's what's happening with your account today.</p>
-              </div>
-              <div className="dashboard-cards">
-                <div className="card">
-                  <div className="card-icon">📊</div>
-                  <h3>Analytics</h3>
-                  <p>View your data insights</p>
-                  <button className="card-btn">View Data</button>
-                </div>
-                <div className="card">
-                  <div className="card-icon">📝</div>
-                  <h3>Forms</h3>
-                  <p>Manage your submitted forms</p>
-                  <button className="card-btn">View Forms</button>
-                </div>
-                <div className="card">
-                  <div className="card-icon">⚙️</div>
-                  <h3>Settings</h3>
-                  <p>Customize your experience</p>
-                  <button className="card-btn">Update Profile</button>
-                </div>
-              </div>
-              <div className="activity-summary">
-                <h3>Recent Activity</h3>
-                <ul>
-                  <li>Last login: Today at 10:30 AM</li>
-                  <li>Form submitted: 2 days ago</li>
-                  <li>Profile updated: 1 week ago</li>
-                </ul>
-              </div>
-              <button className="logout-btn" onClick={onLogout}>Logout</button>
-            </div>
-          </section>
-        )}
+      {/* Skills Section */}
+      <section id="skills" className="skills-section">
+        <h2>Skills</h2>
+        <div className="skills-grid">
+          <div className="skill-card">HTML</div>
+          <div className="skill-card">CSS</div>
+          <div className="skill-card">JavaScript</div>
+          <div className="skill-card">React</div>
+          <div className="skill-card">Node.js</div>
+          <div className="skill-card">Express</div>
+          <div className="skill-card">MongoDB</div>
+          <div className="skill-card">Git & GitHub</div>
+        </div>
+      </section>
 
-        {activeSection === 'profile' && (
-          <section className="section profile-section">
-            <div className="section-content">
-              <h2>User Profile</h2>
-              <div className="profile-info">
-                <div className="profile-avatar">
-                  <span>{username.charAt(0).toUpperCase()}</span>
-                </div>
-                <div className="profile-details">
-                  <h3>{username}</h3>
-                  <p>Full Stack Developer</p>
-                  <p>Email: {username}@example.com</p>
-                </div>
-              </div>
-              <div className="profile-actions">
-                <button className="action-btn">Edit Profile</button>
-                <button className="action-btn">Change Password</button>
-                <button className="action-btn">Change Theme</button>
-              </div>
-              <button className="logout-btn" onClick={onLogout}>Logout</button>
-            </div>
-          </section>
-        )}
+      {/* Projects Section */}
+      <section id="projects" className="projects-section">
+        <h2>Projects</h2>
+        <div className="projects-grid">
+          <div className="project-card">
+            <img src="https://via.placeholder.com/400x200" alt="Project 1" />
+            <h3>Project One</h3>
+            <p>Full Stack web application using MERN stack.</p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+          <div className="project-card">
+            <img src="https://via.placeholder.com/400x200" alt="Project 2" />
+            <h3>Project Two</h3>
+            <p>React frontend with Node.js backend API.</p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+          <div className="project-card">
+            <img src="https://via.placeholder.com/400x200" alt="Project 3" />
+            <h3>Project Three</h3>
+            <p>Responsive portfolio website with animations.</p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+        </div>
+      </section>
 
-        {activeSection === 'home' && (
-          <section className="section home-section">
-            <div className="section-content">
-              <h2>Hello, {username}!</h2>
-              <p>Welcome to your personal space. Here you can fill forms and view your data.</p>
-              <div className="home-actions">
-                <button className="action-btn">Fill New Form</button>
-                <button className="action-btn">View Submitted Data</button>
-              </div>
-              <button className="logout-btn" onClick={onLogout}>Logout</button>
-            </div>
-          </section>
-        )}
-      </main>
+      {/* Contact Section */}
+      <section id="contact" className="contact-section">
+        <h2>Contact Me</h2>
+        <form className="contact-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Dishansh. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
