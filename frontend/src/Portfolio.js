@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Portfolio.css';
 
 function Portfolio() {
+  useEffect(() => {
+    const handleScroll = (e) => {
+      e.preventDefault();
+      const targetId = e.target.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    };
+
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+      link.addEventListener('click', handleScroll);
+    });
+
+    return () => {
+      links.forEach(link => {
+        link.removeEventListener('click', handleScroll);
+      });
+    };
+  }, []);
+
   return (
     <div className="portfolio">
       {/* Hero Section */}
