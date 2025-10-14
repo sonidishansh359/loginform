@@ -51,35 +51,42 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>{isSignup ? 'Signup' : 'Login'}</h1>
+      <div className="login-container">
+        <div className="login-header">
+          <h1>{isSignup ? 'Create Account' : 'Welcome Back'}</h1>
+          <p>{isSignup ? 'Sign up to get started' : 'Sign in to your account'}</p>
+        </div>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Username:</label>
+          <div className="form-group">
             <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
+              placeholder=" "
               required
             />
+            <label>Username</label>
           </div>
-          <div>
-            <label>Password:</label>
+          <div className="form-group">
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
+              placeholder=" "
               required
             />
+            <label>Password</label>
           </div>
-          <button type="submit">{isSignup ? 'Signup' : 'Login'}</button>
+          <button type="submit" className="login-btn">
+            {isSignup ? 'Create Account' : 'Sign In'}
+          </button>
         </form>
-        <button onClick={() => setIsSignup(!isSignup)}>
-          {isSignup ? 'Already have an account? Login' : 'Need an account? Signup'}
+        <button className="toggle-btn" onClick={() => setIsSignup(!isSignup)}>
+          {isSignup ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
         </button>
-      </header>
+      </div>
     </div>
   );
 }
