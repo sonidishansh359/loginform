@@ -6,7 +6,7 @@
 }
 
 html, body {
-  height: 100%;
+  height: auto;
   overflow-x: hidden;
 }
 
@@ -14,7 +14,8 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background: linear-gradient(135deg, #667db6 0%, #0082c8 25%, #0052d4 50%, #3369e7 75%, #8e43e7 100%);
+  overflow-y: auto;
 }
 
 .container {
@@ -83,6 +84,7 @@ body {
 /* Portfolio Layout */
 .portfolio {
   min-height: 100vh;
+  overflow-y: auto;
 }
 
 /* Hero Section */
@@ -91,6 +93,10 @@ body {
   color: white;
   padding: 100px 0;
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-content h1 {
