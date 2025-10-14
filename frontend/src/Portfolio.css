@@ -16,6 +16,7 @@ body {
   color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
+  scrollbar-width: auto;
   line-height: 1.6;
 }
 
