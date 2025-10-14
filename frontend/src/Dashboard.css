@@ -1,22 +1,23 @@
-/* Make page scrollable properly */
+/* Ensure full-page scroll works */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  height: 100%;
+  overflow: auto;
   scroll-behavior: smooth;
 }
 
-/* Dashboard Styles */
+/* Dashboard container */
 .dashboard {
   min-height: 100vh;
+  width: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
 }
 
-/* Header */
+/* Fixed Header */
 .dashboard-header {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -43,7 +44,6 @@ html, body {
   font-size: 1.8rem;
   font-weight: 700;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Menu */
@@ -63,15 +63,13 @@ html, body {
   gap: 0.5rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .menu-toggle:hover {
   background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Dropdown menu */
 .nav-menu {
   position: absolute;
   top: 100%;
@@ -94,45 +92,24 @@ html, body {
   transform: translateY(0);
 }
 
-.nav-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-menu button {
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 0.8rem 1rem;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  color: #333;
-}
-
-.nav-menu button:hover,
-.nav-menu button.active {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  transform: translateX(5px);
-}
-
-/* Main Content */
+/* Main Scrollable Area */
 .dashboard-main {
+  margin-top: 100px; /* space for fixed header */
   flex: 1;
-  padding-top: 100px;
-  overflow-y: auto; /* ✅ Scroll works here */
+  overflow-y: auto; /* ✅ enables scroll */
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
+  padding-bottom: 3rem;
 }
 
+/* Section */
 .section {
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
 }
 
+/* Text */
 .section-content h2 {
   color: white;
   font-size: 2.5rem;
@@ -147,7 +124,7 @@ html, body {
   margin-bottom: 3rem;
 }
 
-/* Cards */
+/* Cards Grid */
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
