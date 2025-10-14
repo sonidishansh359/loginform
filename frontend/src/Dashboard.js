@@ -2,32 +2,43 @@ import React, { useState } from "react";
 import "./Dashboard.css";
 
 function Dashboard() {
-  const [activeSection, setActiveSection] = useState("home");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
-    section.scrollIntoView({ behavior: "smooth" });
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false); // close menu on mobile
   };
 
   return (
     <div className="dashboard">
       {/* Navbar */}
       <nav className="navbar">
-        <div className="logo">FullStack Dev</div>
-        <ul className="nav-links">
+        <div className="logo">Dishansh</div>
+        <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
           <li onClick={() => scrollToSection("home")}>Home</li>
           <li onClick={() => scrollToSection("about")}>About</li>
           <li onClick={() => scrollToSection("skills")}>Skills</li>
           <li onClick={() => scrollToSection("projects")}>Projects</li>
           <li onClick={() => scrollToSection("contact")}>Contact</li>
-        </ul>
+        </div>
+        <div
+          className={`hamburger ${isMenuOpen ? "open" : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </nav>
 
       {/* Hero Section */}
       <section id="home" className="hero-section">
         <div className="hero-content">
           <h1>Hello, I'm <span>Dishansh</span></h1>
-          <p>Full Stack Developer | React, Node.js, MongoDB | Building modern web applications</p>
+          <p>Full Stack Developer | React, Node.js, MongoDB</p>
           <button onClick={() => scrollToSection("projects")}>View Projects</button>
         </div>
       </section>
@@ -37,10 +48,7 @@ function Dashboard() {
         <h2>About Me</h2>
         <div className="about-content">
           <p>
-            I am a passionate Full Stack Developer with expertise in building
-            modern web applications using React, Node.js, Express, and MongoDB.
-            I love transforming ideas into real-world applications and constantly
-            learning new technologies.
+            I am a passionate Full Stack Developer building modern web applications using MERN stack.
           </p>
           <div className="about-image">
             <img src="https://via.placeholder.com/300" alt="Dishansh" />
@@ -52,14 +60,9 @@ function Dashboard() {
       <section id="skills" className="skills-section">
         <h2>Skills</h2>
         <div className="skills-grid">
-          <div className="skill-card">HTML</div>
-          <div className="skill-card">CSS</div>
-          <div className="skill-card">JavaScript</div>
-          <div className="skill-card">React</div>
-          <div className="skill-card">Node.js</div>
-          <div className="skill-card">Express</div>
-          <div className="skill-card">MongoDB</div>
-          <div className="skill-card">Git & GitHub</div>
+          {["HTML", "CSS", "JavaScript", "React", "Node.js", "Express", "MongoDB", "Git"].map(skill => (
+            <div key={skill} className="skill-card">{skill}</div>
+          ))}
         </div>
       </section>
 
@@ -67,24 +70,14 @@ function Dashboard() {
       <section id="projects" className="projects-section">
         <h2>Projects</h2>
         <div className="projects-grid">
-          <div className="project-card">
-            <img src="https://via.placeholder.com/400x200" alt="Project 1" />
-            <h3>Project One</h3>
-            <p>Full Stack web application using MERN stack.</p>
-            <a href="#" target="_blank">View Project</a>
-          </div>
-          <div className="project-card">
-            <img src="https://via.placeholder.com/400x200" alt="Project 2" />
-            <h3>Project Two</h3>
-            <p>React frontend with Node.js backend API.</p>
-            <a href="#" target="_blank">View Project</a>
-          </div>
-          <div className="project-card">
-            <img src="https://via.placeholder.com/400x200" alt="Project 3" />
-            <h3>Project Three</h3>
-            <p>Responsive portfolio website with animations.</p>
-            <a href="#" target="_blank">View Project</a>
-          </div>
+          {[1, 2, 3].map((p) => (
+            <div key={p} className="project-card">
+              <img src="https://via.placeholder.com/400x200" alt={`Project ${p}`} />
+              <h3>Project {p}</h3>
+              <p>Full Stack project using MERN stack.</p>
+              <a href="#">View Project</a>
+            </div>
+          ))}
         </div>
       </section>
 
