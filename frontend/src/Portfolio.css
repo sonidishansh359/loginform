@@ -28,6 +28,7 @@ body {
   display: inline-block;
   font-weight: 600;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -46,6 +47,7 @@ body {
   font-weight: 600;
   margin-left: 15px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
@@ -63,6 +65,7 @@ body {
   font-size: 14px;
   margin: 0 5px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-small:hover {
@@ -145,6 +148,12 @@ section h2 {
   padding: 20px;
   background: #f8f9fa;
   border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .stat h3 {
@@ -165,6 +174,12 @@ section h2 {
   padding: 30px;
   border-radius: 10px;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .skill-category h3 {
@@ -179,6 +194,11 @@ section h2 {
 .skill-category li {
   padding: 8px 0;
   border-bottom: 1px solid #eee;
+  transition: color 0.3s ease;
+}
+
+.skill-category li:hover {
+  color: #667eea;
 }
 
 /* Projects Section */
@@ -223,6 +243,12 @@ section h2 {
   margin-right: 10px;
   display: inline-block;
   margin-bottom: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.project-tech span:hover {
+  background: #667eea;
+  color: white;
 }
 
 .project-links {
@@ -268,6 +294,11 @@ section h2 {
   background: #f8f9fa;
   padding: 30px;
   border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.contact-form:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -282,6 +313,13 @@ section h2 {
   border-radius: 5px;
   font-size: 16px;
   font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
 }
 
 .form-group textarea {

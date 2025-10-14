@@ -7,7 +7,7 @@ function Portfolio() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>John Doe</h1>
+          <h1>Dishansh Soni</h1>
           <h2>Full Stack Developer</h2>
           <p>Passionate about creating innovative web solutions and user experiences.</p>
           <div className="hero-buttons">
