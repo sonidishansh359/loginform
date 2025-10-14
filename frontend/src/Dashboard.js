@@ -5,7 +5,7 @@ function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Highlight navbar on scroll
+  // Highlight navbar active link on scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = ["home", "about", "skills", "projects", "contact"];
@@ -35,7 +35,7 @@ function Dashboard() {
       <nav className="navbar">
         <div className="logo">Dishansh</div>
         <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-          {["home","about","skills","projects","contact"].map(sec => (
+          {["home", "about", "skills", "projects", "contact"].map((sec) => (
             <button
               key={sec}
               className={activeSection === sec ? "active-link" : ""}
@@ -45,12 +45,17 @@ function Dashboard() {
             </button>
           ))}
         </div>
-        <div className={`hamburger ${isMenuOpen ? "open" : ""}`} onClick={()=>setIsMenuOpen(!isMenuOpen)}>
-          <span></span><span></span><span></span>
+        <div
+          className={`hamburger ${isMenuOpen ? "open" : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section id="home" className="hero-section">
         <div className="hero-content">
           <h1>Hello, I'm <span>Dishansh</span></h1>
@@ -59,15 +64,13 @@ function Dashboard() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About */}
       <section id="about" className="about-section">
         <h2>About Me</h2>
         <div className="about-content">
           <div className="about-text">
             <p>
-              I am a passionate Full Stack Developer. I create modern and
-              responsive web applications using React, Node.js, Express, and MongoDB.
-              I love turning ideas into real-world solutions.
+              Passionate Full Stack Developer creating modern web applications with React, Node.js, Express, and MongoDB. I love turning ideas into reality.
             </p>
           </div>
           <div className="about-image">
@@ -76,7 +79,7 @@ function Dashboard() {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Skills */}
       <section id="skills" className="skills-section">
         <h2>Skills</h2>
         <div className="skills-grid">
@@ -89,7 +92,7 @@ function Dashboard() {
             { name: "Express", level: 75 },
             { name: "MongoDB", level: 80 },
             { name: "Git & GitHub", level: 85 },
-          ].map(skill => (
+          ].map((skill) => (
             <div key={skill.name} className="skill-card">
               <h4>{skill.name}</h4>
               <div className="skill-bar">
@@ -100,22 +103,22 @@ function Dashboard() {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Projects */}
       <section id="projects" className="projects-section">
         <h2>Projects</h2>
         <div className="projects-grid">
-          {[1,2,3].map(p => (
+          {[1, 2, 3].map((p) => (
             <div key={p} className="project-card">
               <img src="https://via.placeholder.com/300x150" alt={`Project ${p}`} />
               <h3>Project {p}</h3>
               <p>A full-stack web application built using MERN stack.</p>
-              <a href="#" target="_blank">View Project</a>
+              <a href="#">View Project</a>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact */}
       <section id="contact" className="contact-section">
         <h2>Contact Me</h2>
         <form className="contact-form">
