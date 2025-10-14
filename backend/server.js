@@ -23,6 +23,7 @@ mongoose.connect('mongodb+srv://dishansh:dishansh@cluster0.ojxirwi.mongodb.net/?
 .catch(err => console.log(err));
 
 // Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/form', require('./routes/form'));
 
 app.listen(PORT, () => {
