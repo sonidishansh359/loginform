@@ -7,13 +7,15 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* 🔥 Background Image Set Here */
-  background: url('https://www.syfy.com/sites/syfy/files/2024/01/gettyimages-1271698823.jpg') no-repeat center center/cover;
+  background: url('https://images.stockcake.com/public/b/8/e/b8efcf30-7b33-41dd-86d0-7de568bae604_large/late-night-coding-stockcake.jpg') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* for desktop */
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .App {
@@ -23,9 +25,9 @@ body {
 }
 
 .login-container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.88);
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
   padding: 40px;
   backdrop-filter: blur(10px);
   position: relative;
@@ -39,7 +41,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  background: linear-gradient(45deg, transparent, rgba(0, 0, 0, 0.08), transparent);
   animation: rotate 6s linear infinite;
   z-index: -1;
 }
@@ -55,14 +57,14 @@ body {
 }
 
 .login-header h1 {
-  color: #333;
+  color: #222;
   font-size: 28px;
   margin-bottom: 10px;
   font-weight: 700;
 }
 
 .login-header p {
-  color: #666;
+  color: #555;
   font-size: 16px;
 }
 
@@ -74,7 +76,7 @@ body {
 .form-group input {
   width: 100%;
   padding: 15px 20px;
-  border: 2px solid #e1e5e9;
+  border: 2px solid #ccc; /* light gray border */
   border-radius: 10px;
   font-size: 16px;
   background: #f8f9fa;
@@ -84,9 +86,9 @@ body {
 }
 
 .form-group input:focus {
-  border-color: #667eea;
+  border-color: #444; /* light black focus */
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .form-group label {
@@ -104,14 +106,14 @@ body {
 .form-group input:not(:placeholder-shown) + label {
   top: -8px;
   font-size: 12px;
-  color: #667eea;
+  color: #222;
   background: rgba(255, 255, 255, 0.95);
 }
 
 .login-btn {
   width: 100%;
   padding: 15px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #222 0%, #444 100%);
   color: white;
   border: none;
   border-radius: 10px;
@@ -124,15 +126,15 @@ body {
 
 .login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .toggle-btn {
   width: 100%;
   padding: 12px;
   background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: #222;
+  border: 2px solid #222;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -141,12 +143,18 @@ body {
 }
 
 .toggle-btn:hover {
-  background: #667eea;
+  background: #222;
   color: white;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 480px) {
+  body {
+    background-attachment: scroll; /* mobile fix */
+    background-size: cover;
+    background-position: center center;
+  }
+
   .App {
     padding: 10px;
   }
