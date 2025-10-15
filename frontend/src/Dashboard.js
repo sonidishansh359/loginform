@@ -74,7 +74,7 @@ function Dashboard() {
             </p>
           </div>
           <div className="about-image">
-            <img src="https://via.placeholder.com/300" alt="Dishansh" />
+            <img src="https://images.sympla.com.br/6022943ca97b4-lg.png" alt="Dishansh" />
           </div>
         </div>
       </section>
@@ -109,7 +109,7 @@ function Dashboard() {
         <div className="projects-grid">
           {[1, 2, 3].map((p) => (
             <div key={p} className="project-card">
-              <img src="https://via.placeholder.com/300x150" alt={`Project ${p}`} />
+              <img src="https://images.sympla.com.br/6022943ca97b4-lg.png" alt={`Project ${p}`} />
               <h3>Project {p}</h3>
               <p>A full-stack web application built using MERN stack.</p>
               <a href="#">View Project</a>
