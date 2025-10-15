@@ -35,7 +35,7 @@ function Dashboard() {
     <div className="dashboard government-portfolio">
       {/* Navbar */}
       <nav className="navbar gov-navbar">
-        <div className="logo">Gov Registration Portal</div>
+        <div className="logo">Government Registration Portal</div>
         <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           {["home", "registration", "process", "contact"].map((sec) => (
             <button
