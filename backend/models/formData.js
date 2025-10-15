@@ -9,7 +9,7 @@ const formDataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
+  phone: {
     type: String,
     required: true,
   },

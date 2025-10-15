@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
 function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const navigate = useNavigate();
 
   // Highlight navbar active link on scroll
   useEffect(() => {
@@ -135,7 +137,7 @@ function Dashboard() {
         <div className="social-links">
           <a href="https://in.linkedin.com/">LinkedIn</a> | <a href="https://github.com/sonidishansh359">GitHub</a> | <a href="mailto:sonidishansh359@gmail.com?subject=Hello%20Dishansh&body=Hi%20there!%20I%20want%20to%20connect%20with%20you.">Gmail</a>
         </div>
-        <button onClick={() => window.location.href = '/form'} className="next-btn">Next</button>
+        <button onClick={() => navigate('/form')} className="next-btn">Next</button>
       </footer>
     </div>
   );

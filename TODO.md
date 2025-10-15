@@ -26,3 +26,5 @@
 - [ ] Start backend server (node server.js in backend/)
 - [ ] Start frontend (npm start in frontend/)
 - [ ] Test the Next button navigation and form submission, verify data in MongoDB Atlas
+- [x] Fix form fields: Replace address with phone number
+- [x] Update navigation: Use useNavigate hook instead of window.location.href

@@ -6,7 +6,7 @@ function FormPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    address: '',
+    phone: '',
     dob: '',
     age: '',
     aadharcard: null,
@@ -93,14 +93,14 @@ function FormPage() {
           </div>
           <div className="form-group">
             <input
-              type="text"
-              name="address"
-              value={formData.address}
+              type="tel"
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
               placeholder=" "
               required
             />
-            <label>Address</label>
+            <label>Phone Number</label>
           </div>
           <div className="form-group">
             <input
