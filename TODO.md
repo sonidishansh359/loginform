@@ -28,3 +28,7 @@
 - [ ] Test the Next button navigation and form submission, verify data in MongoDB Atlas
 - [x] Fix form fields: Replace address with phone number
 - [x] Update navigation: Use useNavigate hook instead of window.location.href
+- [x] Add age validation: Age must be between 18 and 60
+- [x] Add file input styling in App.css
+- [x] Remove Aadhaar card file name validation (allow any image)
+- [x] Add checkbox confirmation for Aadhaar card upload

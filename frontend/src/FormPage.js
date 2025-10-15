@@ -10,6 +10,7 @@ function FormPage() {
     dob: '',
     age: '',
     aadharcard: null,
+    confirmAadhaar: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -38,6 +39,14 @@ function FormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Age validation: must be between 18 and 60
+    const age = parseInt(formData.age);
+    if (isNaN(age) || age < 18 || age > 60) {
+      alert('Age must be between 18 and 60.');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const response = await fetch('https://loginform-okk7.onrender.com/api/form', {
@@ -133,6 +142,16 @@ function FormPage() {
               required
             />
             <label>Aadhaar Card Photo</label>
+          </div>
+          <div className="form-group">
+            <input
+              type="checkbox"
+              name="confirmAadhaar"
+              checked={formData.confirmAadhaar}
+              onChange={(e) => setFormData({ ...formData, confirmAadhaar: e.target.checked })}
+              required
+            />
+            <label>I confirm that the uploaded image is my Aadhaar card.</label>
           </div>
           <button type="submit" className="login-btn" disabled={isSubmitting}>
             {isSubmitting ? 'Submitting...' : 'Submit'}
