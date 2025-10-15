@@ -35,7 +35,10 @@ function Dashboard() {
     <div className="dashboard government-portfolio">
       {/* Navbar */}
       <nav className="navbar gov-navbar">
-        <div className="logo">Government Registration Portal</div>
+        <div className="logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/2560px-Flag_of_India.svg.png" alt="Government of India" className="gov-logo" />
+          Government of India
+        </div>
         <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           {["home", "registration", "process", "contact"].map((sec) => (
             <button
@@ -63,15 +66,15 @@ function Dashboard() {
         className="hero-section gov-hero"
         style={{
           backgroundImage:
-            "url('https://www.pmindia.gov.in/wp-content/uploads/2022/09/pm1.jpg')",
+            "url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/2560px-Flag_of_India.svg.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         <div className="hero-overlay">
           <div className="hero-content gov-hero-content">
-            <h1>Welcome to the Official Registration Portal</h1>
-            <p>Please provide your details for official verification</p>
+            <h1>Welcome to the Government of India Portal</h1>
+            <p>Access official government services and information securely.</p>
             <button className="next-btn" onClick={() => scrollToSection("registration")}>
               Start Registration →
             </button>
