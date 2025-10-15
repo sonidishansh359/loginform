@@ -133,7 +133,7 @@ function Dashboard() {
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Dishansh. All rights reserved.</p>
         <div className="social-links">
-          <a href="#">LinkedIn</a> | <a href="#">GitHub</a> | <a href="#">Twitter</a>
+          <a href="https://in.linkedin.com/">LinkedIn</a> | <a href="https://github.com/sonidishansh359">GitHub</a> | <a href="mailto:sonidishansh359@gmail.com?subject=Hello%20Dishansh&body=Hi%20there!%20I%20want%20to%20connect%20with%20you.">Gmail</a>
         </div>
       </footer>
     </div>
