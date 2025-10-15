@@ -12,7 +12,7 @@ app.use(cors({
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://dishansh:dishansh@cluster0.ojxirwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
