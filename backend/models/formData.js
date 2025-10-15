@@ -9,7 +9,19 @@ const formDataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  message: {
+  address: {
+    type: String,
+    required: true,
+  },
+  dob: {
+    type: Date,
+    required: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+  },
+  aadharcard: {
     type: String,
     required: true,
   },

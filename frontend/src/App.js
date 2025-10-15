@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
+import FormPage from './FormPage';
 import './App.css';
 
 function App() {
@@ -45,49 +47,60 @@ function App() {
     }
   };
 
-  if (isLoggedIn) {
-    return <Dashboard username={formData.username} onLogout={() => setIsLoggedIn(false)} />;
-  }
-
   return (
-    <div className="App">
-      <div className="login-container">
-        <div className="login-header">
-          <h1>{isSignup ? 'Create Account' : 'Welcome Back'}</h1>
-          <p>{isSignup ? 'Sign up to get started' : 'Sign in to your account'}</p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder=" "
-              required
-            />
-            <label>Username</label>
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder=" "
-              required
-            />
-            <label>Password</label>
-          </div>
-          <button type="submit" className="login-btn">
-            {isSignup ? 'Create Account' : 'Sign In'}
-          </button>
-        </form>
-        <button className="toggle-btn" onClick={() => setIsSignup(!isSignup)}>
-          {isSignup ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
-        </button>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? (
+              <Dashboard username={formData.username} onLogout={() => setIsLoggedIn(false)} />
+            ) : (
+              <div className="App">
+                <div className="login-container">
+                  <div className="login-header">
+                    <h1>{isSignup ? 'Create Account' : 'Welcome Back'}</h1>
+                    <p>{isSignup ? 'Sign up to get started' : 'Sign in to your account'}</p>
+                  </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder=" "
+                        required
+                      />
+                      <label>Username</label>
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder=" "
+                        required
+                      />
+                      <label>Password</label>
+                    </div>
+                    <button type="submit" className="login-btn">
+                      {isSignup ? 'Create Account' : 'Sign In'}
+                    </button>
+                  </form>
+                  <button className="toggle-btn" onClick={() => setIsSignup(!isSignup)}>
+                    {isSignup ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
+                  </button>
+                </div>
+              </div>
+            )
+          }
+        />
+        <Route path="/form" element={<FormPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
 

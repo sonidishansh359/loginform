@@ -12,3 +12,17 @@
 - [ ] Start backend server (node server.js in backend/)
 - [ ] Start frontend (npm start in frontend/)
 - [ ] Test the form by submitting data and verifying in MongoDB Atlas
+
+# New Task: Add Next Button to Portfolio and Form Page
+
+- [x] Update backend/models/formData.js: Add address (String), dob (Date), age (Number), aadharcard (String) fields
+- [x] Update backend/routes/form.js: Accept new fields (address, dob, age, aadharcard) in POST body
+- [x] Install react-router-dom in frontend (npm install react-router-dom)
+- [x] Create frontend/src/FormPage.js: Form component with inputs for name, email, address, dob, age; file input for aadharcard (convert to base64); submit to /api/form
+- [x] Update frontend/src/App.js: Add BrowserRouter, Routes, Route; add /form route to FormPage; update Dashboard render to use Link or navigate
+- [x] Update frontend/src/Dashboard.js: Add "Next" button in footer to navigate to /form
+- [x] Update frontend/src/Dashboard.css: Add styles for next-btn
+- [ ] Install frontend dependencies (npm install in frontend/)
+- [ ] Start backend server (node server.js in backend/)
+- [ ] Start frontend (npm start in frontend/)
+- [ ] Test the Next button navigation and form submission, verify data in MongoDB Atlas
