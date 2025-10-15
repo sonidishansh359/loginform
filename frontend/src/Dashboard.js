@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Dashboard.css";
+import "./Dashboard.css"; // Make sure to update CSS accordingly
 
 function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ function Dashboard() {
   // Highlight navbar active link on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "skills", "projects", "contact"];
+      const sections = ["home", "registration", "process", "contact"];
       const scrollPos = window.scrollY + 100;
       for (let sec of sections) {
         const el = document.getElementById(sec);
@@ -32,12 +32,12 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard government-portfolio">
       {/* Navbar */}
-      <nav className="navbar">
-        <div className="logo">Dishansh</div>
+      <nav className="navbar gov-navbar">
+        <div className="logo">Gov Registration Portal</div>
         <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-          {["home", "about", "skills", "projects", "contact"].map((sec) => (
+          {["home", "registration", "process", "contact"].map((sec) => (
             <button
               key={sec}
               className={activeSection === sec ? "active-link" : ""}
@@ -57,87 +57,85 @@ function Dashboard() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section id="home" className="hero-section">
-        <div className="hero-content">
-          <h1>Hello, I'm <span>Dishansh</span></h1>
-          <p>Full Stack Developer | React | Node.js | MongoDB</p>
-          <button onClick={() => scrollToSection("projects")}>View Projects</button>
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="about-section">
-        <h2>About Me</h2>
-        <div className="about-content">
-          <div className="about-text">
-            <p>
-              Passionate Full Stack Developer creating modern web applications with React, Node.js, Express, and MongoDB. I love turning ideas into reality.
-            </p>
-          </div>
-          <div className="about-image">
-            <img src="https://images.sympla.com.br/6022943ca97b4-lg.png" alt="Dishansh" />
+      {/* Hero Section */}
+      <section
+        id="home"
+        className="hero-section gov-hero"
+        style={{
+          backgroundImage:
+            "url('https://www.pmindia.gov.in/wp-content/uploads/2022/09/pm1.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="hero-overlay">
+          <div className="hero-content gov-hero-content">
+            <h1>Welcome to the Official Registration Portal</h1>
+            <p>Please provide your details for official verification</p>
+            <button className="next-btn" onClick={() => scrollToSection("registration")}>
+              Start Registration →
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Skills */}
-      <section id="skills" className="skills-section">
-        <h2>Skills</h2>
-        <div className="skills-grid">
-          {[
-            { name: "HTML", level: 90 },
-            { name: "CSS", level: 85 },
-            { name: "JavaScript", level: 90 },
-            { name: "React", level: 85 },
-            { name: "Node.js", level: 80 },
-            { name: "Express", level: 75 },
-            { name: "MongoDB", level: 80 },
-            { name: "Git & GitHub", level: 85 },
-          ].map((skill) => (
-            <div key={skill.name} className="skill-card">
-              <h4>{skill.name}</h4>
-              <div className="skill-bar">
-                <div className="skill-level" style={{ width: `${skill.level}%` }}></div>
-              </div>
-            </div>
-          ))}
+      {/* Registration Section */}
+      <section id="registration" className="registration-section">
+        <h2>User Registration</h2>
+        <p>Fill in your personal details to proceed.</p>
+        <div className="registration-cards">
+          <div className="card">
+            <h3>Step 1</h3>
+            <p>Provide Name, Email, and Phone Number</p>
+          </div>
+          <div className="card">
+            <h3>Step 2</h3>
+            <p>Upload Aadhaar or Government ID</p>
+          </div>
+          <div className="card">
+            <h3>Step 3</h3>
+            <p>Submit Form for Verification</p>
+          </div>
         </div>
+        <button
+          className="next-btn registration-next-btn"
+          onClick={() => navigate("/form")}
+        >
+          Proceed to Form →
+        </button>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="projects-section">
-        <h2>Projects</h2>
-        <div className="projects-grid">
-          {[1, 2, 3].map((p) => (
-            <div key={p} className="project-card">
-              <img src="https://thumbs.dreamstime.com/z/projects-concept-black-chalkboard-d-rendering-handwritten-top-view-office-desk-lot-business-office-supplies-79906734.jpg?ct=jpeg" alt={`Project ${p}`} />
-              <h3>Project {p}</h3>
-              <p>A full-stack web application built using MERN stack.</p>
-              <a href="#">View Project</a>
-            </div>
-          ))}
-        </div>
+      {/* Process Section */}
+      <section id="process" className="process-section">
+        <h2>How It Works</h2>
+        <ol className="process-list">
+          <li>Fill personal details</li>
+          <li>Upload valid government ID</li>
+          <li>System verifies identity via OCR & official checks</li>
+          <li>Receive confirmation & access official services</li>
+        </ol>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="contact-section">
-        <h2>Contact Me</h2>
-        <form className="contact-form">
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <textarea placeholder="Message"></textarea>
-          <button type="submit">Send</button>
+      {/* Contact Section */}
+      <section id="contact" className="contact-section gov-contact">
+        <h2>Contact Us</h2>
+        <form className="contact-form gov-contact-form">
+          <input type="text" placeholder="Full Name" />
+          <input type="email" placeholder="Email Address" />
+          <textarea placeholder="Message / Query"></textarea>
+          <button type="submit" className="next-btn">
+            Submit Query
+          </button>
         </form>
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Dishansh. All rights reserved.</p>
+      <footer className="footer gov-footer">
+        <p>&copy; {new Date().getFullYear()} Government Registration Portal</p>
         <div className="social-links">
-          <a href="https://in.linkedin.com/">LinkedIn</a> | <a href="https://github.com/sonidishansh359">GitHub</a> | <a href="mailto:sonidishansh359@gmail.com?subject=Hello%20Dishansh&body=Hi%20there!%20I%20want%20to%20connect%20with%20you.">Gmail</a>
+          <a href="https://www.pmindia.gov.in/en/">Official Site</a> |{" "}
+          <a href="mailto:support@govportal.in">Email Support</a>
         </div>
-        <button onClick={() => navigate('/form')} className="next-btn">Next</button>
       </footer>
     </div>
   );
