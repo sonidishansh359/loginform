@@ -93,7 +93,8 @@ function FormPage() {
         alert(data.error || 'Error submitting form');
       }
     } catch (error) {
-      alert('Error submitting form');
+      console.error('Error submitting form:', error);
+      alert('Error submitting form: ' + error.message);
     } finally {
       setIsSubmitting(false);
     }
