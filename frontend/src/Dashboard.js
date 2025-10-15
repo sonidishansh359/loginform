@@ -137,7 +137,7 @@ function Dashboard() {
         <p>&copy; {new Date().getFullYear()} Government Registration Portal</p>
         <div className="social-links">
           <a href="https://www.pmindia.gov.in/en/">Official Site</a> |{" "}
-          <a href="mailto:support@govportal.in">Email Support</a>
+          <a href="mailto:sonidishansh359@gmail.in">Email Support</a>
         </div>
       </footer>
     </div>

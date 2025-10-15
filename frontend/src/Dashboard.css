@@ -256,3 +256,6 @@ body, html {
   .nav-links.active { display: flex; }
   .hamburger { display: flex; }
 }
+.next-btn registration-next-btn {
+  margin-top: 3rem; /* currently 1.5rem, change to 3rem to move button lower */
+}
