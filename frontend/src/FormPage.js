@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Tesseract from 'tesseract.js';
 import './App.css'; // Reuse App.css for styling
 
 function FormPage() {
@@ -10,9 +11,9 @@ function FormPage() {
     dob: '',
     age: '',
     aadharcard: null,
-    confirmAadhaar: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,16 +26,40 @@ function FormPage() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          aadharcard: reader.result, // Base64 string
+    if (!file) return;
+
+    setIsVerifying(true);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const imageData = reader.result;
+
+      // OCR recognition
+      Tesseract.recognize(imageData, 'eng')
+        .then(({ data: { text } }) => {
+          const lowerText = text.toLowerCase();
+          if (
+            lowerText.includes('aadhaar') ||
+            lowerText.includes('government of india')
+          ) {
+            setFormData({ ...formData, aadharcard: imageData });
+            alert('✅ Aadhaar verified successfully.');
+          } else {
+            alert('❌ Uploaded image is not a valid Aadhaar card.');
+            e.target.value = ''; // clear file input
+            setFormData({ ...formData, aadharcard: null });
+          }
+        })
+        .catch(() => {
+          alert('Error reading image. Try again.');
+          e.target.value = '';
+          setFormData({ ...formData, aadharcard: null });
+        })
+        .finally(() => {
+          setIsVerifying(false);
         });
-      };
-      reader.readAsDataURL(file);
-    }
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
@@ -47,18 +72,22 @@ function FormPage() {
       return;
     }
 
+    // Aadhaar validation
+    if (!formData.aadharcard) {
+      alert('Please upload a valid Aadhaar card image before submitting.');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const response = await fetch('https://loginform-okk7.onrender.com/api/form', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
       const data = await response.json();
       if (response.ok) {
-        alert('Form submitted successfully!');
+        alert('✅ Form submitted successfully!');
         navigate('/'); // Navigate back to dashboard or home
       } else {
         alert(data.error || 'Error submitting form');
@@ -143,18 +172,8 @@ function FormPage() {
             />
             <label>Aadhaar Card Photo</label>
           </div>
-          <div className="form-group">
-            <input
-              type="checkbox"
-              name="confirmAadhaar"
-              checked={formData.confirmAadhaar}
-              onChange={(e) => setFormData({ ...formData, confirmAadhaar: e.target.checked })}
-              required
-            />
-            <label>I confirm that the uploaded image is my Aadhaar card.</label>
-          </div>
-          <button type="submit" className="login-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+          <button type="submit" className="login-btn" disabled={isSubmitting || isVerifying}>
+            {isSubmitting || isVerifying ? 'Processing...' : 'Submit'}
           </button>
         </form>
       </div>
