@@ -109,7 +109,7 @@ function Dashboard() {
         <div className="projects-grid">
           {[1, 2, 3].map((p) => (
             <div key={p} className="project-card">
-              <img src="https://images.sympla.com.br/6022943ca97b4-lg.png" alt={`Project ${p}`} />
+              <img src="https://thumbs.dreamstime.com/z/projects-concept-black-chalkboard-d-rendering-handwritten-top-view-office-desk-lot-business-office-supplies-79906734.jpg?ct=jpeg" alt={`Project ${p}`} />
               <h3>Project {p}</h3>
               <p>A full-stack web application built using MERN stack.</p>
               <a href="#">View Project</a>

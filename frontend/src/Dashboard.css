@@ -673,3 +673,22 @@ body, html {
     font-size: 1.4rem;
   }
 }
+.project-card a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 24px;
+  border-radius: 25px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #d3d3d3;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.project-card a:hover {
+  background-color: #2b2b2b;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
