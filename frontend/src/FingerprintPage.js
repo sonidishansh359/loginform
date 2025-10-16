@@ -7,7 +7,8 @@ function FingerprintPage() {
   const formId = location.state?.formId;
 
   const [isScanning, setIsScanning] = useState(false);
-  const [error, setError] = useState("");
+  const [scanProgress, setScanProgress] = useState(0);
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     if (!formId) {
@@ -16,42 +17,28 @@ function FingerprintPage() {
     }
   }, [formId, navigate]);
 
-  const handleFingerprintLogin = async () => {
-    setError("");
+  const handleFingerprintLogin = () => {
+    if (isScanning || scanned) return;
+
     setIsScanning(true);
+    setScanProgress(0);
 
-    try {
-      // Step 1: Get challenge from backend
-      const challengeRes = await fetch(`https://loginform-okk7.onrender.com/api/form/fingerprint-challenge/${formId}`);
-      if (!challengeRes.ok) throw new Error(`Failed to get challenge: ${challengeRes.status} ${challengeRes.statusText}`);
-      const challengeData = await challengeRes.json();
+    // Simulate scanning progress
+    const interval = setInterval(() => {
+      setScanProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsScanning(false);
+          setScanned(true);
 
-      // Step 2: User authenticates with fingerprint sensor
-      const credential = await navigator.credentials.get({
-        publicKey: {
-          challenge: Uint8Array.from(atob(challengeData.challenge), c => c.charCodeAt(0)),
-          timeout: 60000,
-          userVerification: "required"
+          // Auto navigate after short delay
+          setTimeout(() => {
+            navigate("/success", { state: { formId } });
+          }, 800);
         }
+        return prev + 10;
       });
-
-      // Step 3: Send assertion to backend
-      const verifyRes = await fetch(`https://loginform-okk7.onrender.com/api/form/fingerprint-verify/${formId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credential)
-      });
-      if (!verifyRes.ok) throw new Error(`Verification failed: ${verifyRes.status} ${verifyRes.statusText}`);
-      const result = await verifyRes.json();
-      alert(result.message);
-      navigate("/success");
-
-    } catch (err) {
-      console.error(err);
-      setError(err.message || "Fingerprint scan failed");
-    } finally {
-      setIsScanning(false);
-    }
+    }, 200); // progress update every 200ms
   };
 
   return (
@@ -68,52 +55,73 @@ function FingerprintPage() {
             width: 180,
             height: 180,
             borderRadius: "50%",
-            background: isScanning ? "#ffd54f" : "#f2f2f2",
+            background: scanned ? "#4caf50" : isScanning ? "#ffd54f" : "#f2f2f2",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "0 auto",
-            boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
+            boxShadow: scanned
+              ? "0 6px 18px rgba(76,175,80,0.35)"
+              : "0 6px 18px rgba(0,0,0,0.08)",
             transition: "all 300ms ease",
             fontSize: 64,
-            color: "#666",
+            color: scanned ? "#fff" : "#666",
           }}
         >
-          {isScanning ? "🔒" : "👆"}
+          {scanned ? "✔️" : isScanning ? "🔒" : "👆"}
         </div>
-        <p style={{ marginTop: 12, color: "#666" }}>
-          {isScanning ? "Scanning..." : "Ready to scan"}
+        <p style={{ marginTop: 12, color: scanned ? "#2e7d32" : "#666" }}>
+          {scanned ? "Fingerprint scanned" : isScanning ? "Scanning..." : "Ready to scan"}
         </p>
+
+        {/* Progress bar */}
+        {isScanning && (
+          <div style={{ marginTop: 20, width: "100%", maxWidth: 200, margin: "20px auto" }}>
+            <div
+              style={{
+                width: "100%",
+                height: 10,
+                backgroundColor: "#e0e0e0",
+                borderRadius: 5,
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  width: `${scanProgress}%`,
+                  height: "100%",
+                  backgroundColor: "#4caf50",
+                  transition: "width 0.2s",
+                }}
+              />
+            </div>
+            <p style={{ marginTop: 5, fontSize: 14, color: "#666" }}>{scanProgress}%</p>
+          </div>
+        )}
       </div>
 
       {/* Scan button */}
       <button
         onClick={handleFingerprintLogin}
-        disabled={isScanning}
+        disabled={isScanning || scanned}
         style={{
           padding: "12px 25px",
           fontSize: 16,
           borderRadius: 8,
           border: "none",
-          cursor: isScanning ? "not-allowed" : "pointer",
+          cursor: isScanning || scanned ? "not-allowed" : "pointer",
           background: "#1976d2",
           color: "#fff",
           marginTop: 20,
         }}
       >
-        {isScanning ? "Scanning..." : "Scan Fingerprint"}
+        {isScanning ? "Scanning..." : scanned ? "Scanned" : "Scan Fingerprint"}
       </button>
 
-      {/* Error message */}
-      {error && (
-        <div style={{ marginTop: 18, color: "#c62828" }}>
-          <small>{error}</small>
-        </div>
-      )}
-
+      {/* Note */}
       <div style={{ marginTop: 18, color: "#999", fontSize: 13 }}>
-        <div>Note: Make sure this device has a registered WebAuthn credential.</div>
-        <div>Works only on browsers supporting WebAuthn over HTTPS.</div>
+        <div>Note: This is a simulated fingerprint scan for demo purposes.</div>
+        <div>No backend verification or passkey is required.</div>
       </div>
     </div>
   );
