@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function FingerprintPage() {
@@ -8,6 +8,13 @@ function FingerprintPage() {
 
   const [isScanning, setIsScanning] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!formId) {
+      alert("Form ID not found");
+      navigate("/form");
+    }
+  }, [formId, navigate]);
 
   const handleFingerprintLogin = async () => {
     setError("");
