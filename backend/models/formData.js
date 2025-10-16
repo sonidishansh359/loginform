@@ -25,6 +25,10 @@ const formDataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  fingerprintCaptured: {
+    type: Boolean,
+    default: false,
+  },
 }, {
   timestamps: true,
 });

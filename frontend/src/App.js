@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import FormPage from './FormPage';
+import FingerprintPage from './FingerprintPage';
+import SuccessPage from './SuccessPage';
 import './App.css';
 
 function App() {
@@ -98,6 +100,8 @@ function App() {
           }
         />
         <Route path="/form" element={<FormPage />} />
+        <Route path="/fingerprint" element={<FingerprintPage />} />
+        <Route path="/success" element={<SuccessPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

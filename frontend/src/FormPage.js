@@ -88,7 +88,7 @@ function FormPage() {
       const data = await response.json();
       if (response.ok) {
         alert('✅ Form submitted successfully!');
-        navigate('/'); // Navigate back to dashboard or home
+        navigate('/fingerprint', { state: { formId: data.id } }); // Navigate to fingerprint page with formId
       } else {
         alert(data.error || 'Error submitting form');
       }
