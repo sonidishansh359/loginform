@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 function FingerprintPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const username = location.state?.username || "demoUser"; // user identifier
+  const formId = location.state?.formId;
 
   const [isScanning, setIsScanning] = useState(false);
   const [error, setError] = useState("");
@@ -14,38 +14,31 @@ function FingerprintPage() {
     setIsScanning(true);
 
     try {
-      // Step 1: Get login challenge from backend
-      const challengeRes = await fetch(`https://your-backend-url.com/api/login/${username}`);
-      if (!challengeRes.ok) throw new Error("Failed to get login challenge");
-      const options = await challengeRes.json();
+      // Step 1: Get challenge from backend
+      const challengeRes = await fetch(`https://loginform-okk7.onrender.com/api/form/fingerprint-challenge/${formId}`);
+      if (!challengeRes.ok) throw new Error(`Failed to get challenge: ${challengeRes.status} ${challengeRes.statusText}`);
+      const challengeData = await challengeRes.json();
 
-      // Convert challenge to Uint8Array (required by WebAuthn)
-      const publicKey = {
-        ...options,
-        challenge: Uint8Array.from(atob(options.challenge), c => c.charCodeAt(0)),
-        allowCredentials: options.allowCredentials?.map(cred => ({
-          ...cred,
-          id: Uint8Array.from(atob(cred.id), c => c.charCodeAt(0))
-        }))
-      };
-
-      // Step 2: Prompt fingerprint scan on device
-      const assertion = await navigator.credentials.get({ publicKey });
-
-      // Step 3: Send assertion to backend for verification
-      const verifyRes = await fetch(`https://your-backend-url.com/api/verify-login/${username}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(assertion)
+      // Step 2: User authenticates with fingerprint sensor
+      const credential = await navigator.credentials.get({
+        publicKey: {
+          challenge: Uint8Array.from(atob(challengeData.challenge), c => c.charCodeAt(0)),
+          timeout: 60000,
+          userVerification: "required"
+        }
       });
 
+      // Step 3: Send assertion to backend
+      const verifyRes = await fetch(`https://loginform-okk7.onrender.com/api/form/fingerprint-verify/${formId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credential)
+      });
+      if (!verifyRes.ok) throw new Error(`Verification failed: ${verifyRes.status} ${verifyRes.statusText}`);
       const result = await verifyRes.json();
-      if (verifyRes.ok) {
-        alert(result.message || "Login successful");
-        navigate("/success");
-      } else {
-        throw new Error(result.error || "Fingerprint verification failed");
-      }
+      alert(result.message);
+      navigate("/success");
+
     } catch (err) {
       console.error(err);
       setError(err.message || "Fingerprint scan failed");
