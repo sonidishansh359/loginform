@@ -20,7 +20,7 @@ app.use(express.json({ limit: '10mb' }));
 // ==========================
 // 🗄️ MongoDB Connection
 // ==========================
-mongoose.connect('mongodb+srv://dishansh:dishansh@cluster0.ojxirwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://dishansh:dishansh@cluster1.huxpfpq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
