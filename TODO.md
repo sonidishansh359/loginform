@@ -1,15 +1,13 @@
-# TODO: Implement Fingerprint Scanning After Form Submission
+# TODO: Fix Signup 500 Internal Server Error
 
-## Backend Changes
-- [x] Update `backend/models/formData.js` to add `fingerprintCaptured` field (Boolean, default false)
-- [x] Update `backend/routes/form.js` to add PUT endpoint `/fingerprint/:id` for updating fingerprint status
+## Completed Steps
+- [x] Analyze the signup endpoint code in backend/routes/auth.js
+- [x] Add detailed error logging to the signup route catch block
 
-## Frontend Changes
-- [x] Create `frontend/src/FingerprintPage.js`: UI for fingerprint scanning simulation
-- [x] Create `frontend/src/SuccessPage.js`: Page displaying success message
-- [x] Edit `frontend/src/FormPage.js`: Change success navigation to '/fingerprint'
-- [x] Edit `frontend/src/App.js`: Add routes for '/fingerprint' and '/success'
-
-## Testing
-- [ ] Test full flow: Form submit -> Fingerprint page -> Success page
-- [ ] Verify backend updates fingerprint status correctly
+## Pending Steps
+- [ ] Redeploy the backend to Render to apply the logging changes
+- [ ] Test the signup functionality again from the frontend
+- [ ] Check Render dashboard logs for the specific error details
+- [ ] Identify the root cause of the 500 error based on logs
+- [ ] Implement the necessary fix (e.g., database connection, validation, etc.)
+- [ ] Redeploy and verify the fix works
